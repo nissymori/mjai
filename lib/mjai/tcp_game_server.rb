@@ -8,9 +8,9 @@ require "mjai/tcp_player"
 
 
 module Mjai
-    
+
     class TCPGameServer
-        
+
         class LocalError < StandardError
         end
 
@@ -21,14 +21,14 @@ module Mjai
           @mutex = Mutex.new()
           @num_finished_games = 0
         end
-        
+
         attr_reader(:params, :players, :num_finished_games)
-        
+
         def run()
           puts("Listening on host %s, port %d" % [@params[:host], self.port])
           puts("URL: %s" % self.server_url)
           puts("Waiting for %d players..." % self.num_tcp_players)
-          @pids = []
+          @pids = [] # start_default_players の部分でundefinedなのでそこでも定義
           begin
             start_default_players()
             while true
@@ -92,9 +92,9 @@ module Mjai
             raise(ex)
           end
         end
-        
+
         def process_one_game()
-          
+
           game = nil
           success = false
           begin
@@ -102,7 +102,7 @@ module Mjai
           rescue => ex
             print_backtrace(ex)
           end
-          
+
           begin
             for player in @players
               player.close()
@@ -110,7 +110,7 @@ module Mjai
           rescue => ex
             print_backtrace(ex)
           end
-          
+
           begin
             for pid in @pids
               Process.waitpid(pid)
@@ -118,16 +118,16 @@ module Mjai
           rescue => ex
             print_backtrace(ex)
           end
-          
+
           @num_finished_games += 1
-          
+
           if success
             on_game_succeed(game)
           else
             on_game_fail(game)
           end
           puts()
-          
+
           @pids = []
           @players = []
           if @num_finished_games >= @params[:num_games]
@@ -135,38 +135,42 @@ module Mjai
           else
             start_default_players()
           end
-          
+
         end
-        
+
         def server_url
           return "mjsonp://localhost:%d/%s" % [self.port, @params[:room]]
         end
-        
+
         def port
           return @server.addr[1]
         end
-        
+
         def start_default_players()
+          puts("Listening on host %s, port %d" % [@params[:host], self.port])
+          puts("URL: %s" % self.server_url)
+          puts("Waiting for %d players..." % self.num_tcp_players)
+          @pids = []
           for command in @params[:player_commands]
             command += " " + self.server_url
             puts(command)
             @pids.push(fork(){ exec(command) })
           end
         end
-        
+
         def send(socket, hash)
           line = JSON.dump(hash)
           puts("server -> player ?\t#{line}")
           socket.puts(line)
         end
-        
+
         def print_backtrace(ex, io = $stderr)
           io.printf("%s: %s (%p)\n", ex.backtrace[0], ex.message, ex.class)
           for s in ex.backtrace[1..-1]
             io.printf("        %s\n", s)
           end
         end
-        
+
     end
-    
+
 end
