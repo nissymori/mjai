@@ -146,11 +146,11 @@ module Mjai
           return @server.addr[1]
         end
 
-        def start_default_players(params)
-          for command in params[:player_commands]
+        def start_default_players()
+          for command in @params[:player_commands]
             command += " " + self.server_url
             puts(command)
-            pids.push(fork(){ exec(command) })
+            @pids.push(fork(){ exec(command) })
           end
         end
 
