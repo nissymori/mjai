@@ -8,12 +8,12 @@ require "mjai/file_converter"
 require "mjai/game_stats"
 
 
-def server_url(params)
+def server_url(params)  # 新たに実装
   return "mjsonp://localhost:%d/%s" % [params[:port], params[:room]]
 end
 
 
-def start_default_players_2(params)
+def start_default_players_2(params)  # 新たに実装
   pids = []
   for command in params[:player_commands]
     command += " " + server_url(params)
@@ -81,7 +81,7 @@ module Mjai
                     else
                       num_games = opts["games"].to_i()
                   end
-                  server = TCPActiveGameServer.new({
+                  params = {
                       :host => opts["host"],
                       :port => opts["port"].to_i(),
                       :room => opts["room"],
@@ -89,12 +89,11 @@ module Mjai
                       :player_commands => player_commands,
                       :num_games => num_games,
                       :log_dir => opts["log_dir"],
-                  })
+                  }
                   begin
-                    server.start_default_players()
+                    start_default_players_2(params)
                   rescue puts("failed")
                   end
-                  
 
 
                 when "convert"

@@ -30,7 +30,7 @@ module Mjai
           puts("Waiting for %d players..." % self.num_tcp_players)
           @pids = [] # start_default_players の部分でundefinedなのでそこでも定義
           begin
-            start_default_players()
+            #start_default_players()
             while true
               Thread.new(@server.accept()) do |socket|
                 error = nil
@@ -146,15 +146,11 @@ module Mjai
           return @server.addr[1]
         end
 
-        def start_default_players()
-          puts("Listening on host %s, port %d" % [@params[:host], self.port])
-          puts("URL: %s" % self.server_url)
-          puts("Waiting for %d players..." % self.num_tcp_players)
-          @pids = []
-          for command in @params[:player_commands]
+        def start_default_players(params)
+          for command in params[:player_commands]
             command += " " + self.server_url
             puts(command)
-            @pids.push(fork(){ exec(command) })
+            pids.push(fork(){ exec(command) })
           end
         end
 
