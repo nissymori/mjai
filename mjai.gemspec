@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = []
   s.rdoc_options = []
 
-  #s.add_dependency("json", ["1.6.0"])
+  #s.add_dependency("json", ["1.6.0"])以下3つ不要
   #s.add_dependency("nokogiri", ["1.6.0"])
   #s.add_dependency("bundler", ["1.0.0"])
   s.add_dependency("sass", ["3.7.4"])

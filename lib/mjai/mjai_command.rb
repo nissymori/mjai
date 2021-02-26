@@ -8,17 +8,31 @@ require "mjai/file_converter"
 require "mjai/game_stats"
 
 
+def server_url(params)  # 新たに実装
+  return "mjsonp://localhost:%d/%s" % [params[:port], params[:room]]
+end
+
+
+def start_default_players_2(params)  # 新たに実装
+  pids = []
+  for command in params[:player_commands]
+    command += " " + server_url(params)
+    puts(command)
+    pids.push(fork(){ exec(command) })
+  end
+end
+
 module Mjai
-    
+
     class MjaiCommand
-        
+
         def self.execute(command_name, argv)
-          
+
           Thread.abort_on_exception = true
           case command_name
-            
+
             when "mjai"
-              
+
               action = argv.shift()
               opts = OptionParser.getopts(argv, "",
                   "port:11600", "host:127.0.0.1", "room:default", "game_type:one_kyoku",
@@ -51,6 +65,36 @@ module Mjai
                       :log_dir => opts["log_dir"],
                   })
                   server.run()
+              #ここからclientというactoinを追加してclientだけを動かす様にしたい。
+                when "client"
+                  $stdout.sync = true
+                  player_commands = argv
+                  if opts["repeat"]
+                    $stderr.puts("--repeat is deprecated. Use --games=inifinite instead.")
+                    exit(1)
+                  end
+                  case opts["games"]
+                    when "auto"
+                      num_games = player_commands.size == 4 ? 1 : 1.0/0.0
+                    when "infinite"
+                      num_games = 1.0/0.0
+                    else
+                      num_games = opts["games"].to_i()
+                  end
+                  params = {
+                      :host => opts["host"],
+                      :port => opts["port"].to_i(),
+                      :room => opts["room"],
+                      :game_type => opts["game_type"].intern,
+                      :player_commands => player_commands,
+                      :num_games => num_games,
+                      :log_dir => opts["log_dir"],
+                  }
+                  begin
+                    start_default_players_2(params)
+                  rescue puts("failed")
+                  end
+
 
                 when "convert"
                   conv = FileConverter.new()
@@ -94,17 +138,17 @@ module Mjai
                       "http://gimite.net/pukiwiki/index.php?" +
                       "Mjai%20%CB%E3%BF%FDAI%C2%D0%C0%EF%A5%B5%A1%BC%A5%D0\n")
                   exit(1)
-                  
+
               end
-              
+
             when /^mjai-(.+)$/
-              
+
               $stdout.sync = true
               $stderr.sync = true
               player_type = $1
               opts = OptionParser.getopts(argv, "", "t:", "name:")
               url = ARGV.shift()
-              
+
               if !url
                 $stderr.puts(
                     "Usage:\n" +
@@ -125,14 +169,14 @@ module Mjai
                   :name => opts["name"] || player_type,
               })
               game.play()
-              
+
             else
               raise("should not happen")
-          
+
           end
-          
+
         end
-        
+
     end
-    
+
 end

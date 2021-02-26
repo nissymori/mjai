@@ -10,14 +10,14 @@ require "mjai/puppet_player"
 
 
 module Mjai
-    
+
     class TCPClientGame < Game
-        
+
         def initialize(params)
           super()
           @params = params
         end
-        
+
         def play()
           uri = URI.parse(@params[:url])
           TCPSocket.open(uri.host, uri.port) do |socket|
@@ -54,11 +54,11 @@ module Mjai
             end
           end
         end
-        
+
         def expect_response_from?(player)
           return player.id == @my_id
         end
-        
+
     end
-    
+
 end
