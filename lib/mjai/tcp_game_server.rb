@@ -28,7 +28,7 @@ module Mjai
           puts("Listening on host %s, port %d" % [@params[:host], self.port])
           puts("URL: %s" % self.server_url)
           puts("Waiting for %d players..." % self.num_tcp_players)
-          @pids = [] # start_default_players の部分でundefinedなのでそこでも定義
+          @pids = [] 
           begin
             #start_default_players()
             while true
