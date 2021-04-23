@@ -1,7 +1,8 @@
-require "mjai/active_game"
-require "mjai/tcp_game_server"
-require "mjai/confidence_interval"
-require "mjai/file_converter"
+$LOAD_PATH.unshift(__dir__) unless $LOAD_PATH.include?(__dir__)
+require "active_game"
+require "tcp_game_server"
+require "confidence_interval"
+require "file_converter"
 
 
 module Mjai

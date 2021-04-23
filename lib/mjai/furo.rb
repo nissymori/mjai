@@ -1,5 +1,6 @@
-require "mjai/with_fields"
-require "mjai/mentsu"
+$LOAD_PATH.unshift(__dir__) unless $LOAD_PATH.include?(__dir__)
+require "with_fields"
+require "mentsu"
 
 
 module Mjai

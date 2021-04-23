@@ -1,7 +1,7 @@
 # coding: utf-8
-
-require "mjai/archive"
-require "mjai/confidence_interval"
+$LOAD_PATH.unshift(__dir__) unless $LOAD_PATH.include?(__dir__)
+require "archive"
+require "confidence_interval"
 
 
 module Mjai

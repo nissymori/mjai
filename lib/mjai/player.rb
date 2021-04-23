@@ -1,7 +1,8 @@
 require "ostruct"
 
-require "mjai/pai"
-require "mjai/tenpai_analysis"
+$LOAD_PATH.unshift(__dir__) unless $LOAD_PATH.include?(__dir__)
+require "pai"
+require "tenpai_analysis"
 
 
 module Mjai

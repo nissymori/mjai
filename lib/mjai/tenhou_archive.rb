@@ -3,11 +3,11 @@
 require "zlib"
 require "uri"
 require "nokogiri"
-
-require "mjai/archive"
-require "mjai/pai"
-require "mjai/action"
-require "mjai/puppet_player"
+$LOAD_PATH.unshift(__dir__) unless $LOAD_PATH.include?(__dir__)
+require "archive"
+require "pai"
+require "action"
+require "puppet_player"
 
 
 module Mjai

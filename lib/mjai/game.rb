@@ -1,8 +1,9 @@
-require "mjai/action"
-require "mjai/pai"
-require "mjai/furo"
-require "mjai/hora"
-require "mjai/validation_error"
+$LOAD_PATH.unshift(__dir__) unless $LOAD_PATH.include?(__dir__)
+require "action"
+require "pai"
+require "furo"
+require "hora"
+require "validation_error"
 
 
 module Mjai

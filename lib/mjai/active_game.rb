@@ -1,7 +1,8 @@
-require "mjai/game"
-require "mjai/action"
-require "mjai/hora"
-require "mjai/validation_error"
+$LOAD_PATH.unshift(__dir__) unless $LOAD_PATH.include?(__dir__)
+require "game"
+require "action"
+require "hora"
+require "validation_error"
 
 
 module Mjai

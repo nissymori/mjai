@@ -1,8 +1,8 @@
 require "timeout"
-
-require "mjai/player"
-require "mjai/action"
-require "mjai/validation_error"
+$LOAD_PATH.unshift(__dir__) unless $LOAD_PATH.include?(__dir__)
+require "player"
+require "action"
+require "validation_error"
 
 
 module Mjai

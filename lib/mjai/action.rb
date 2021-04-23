@@ -1,4 +1,5 @@
-require "mjai/jsonizable"
+$LOAD_PATH.unshift(__dir__) unless $LOAD_PATH.include?(__dir__)
+require "jsonizable"
 
 
 module Mjai

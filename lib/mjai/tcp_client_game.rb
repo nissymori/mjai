@@ -3,10 +3,10 @@ require "uri"
 
 require "rubygems"
 require "json"
-
-require "mjai/game"
-require "mjai/action"
-require "mjai/puppet_player"
+$LOAD_PATH.unshift(__dir__) unless $LOAD_PATH.include?(__dir__)
+require "game"
+require "action"
+require "puppet_player"
 
 
 module Mjai

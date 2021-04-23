@@ -1,5 +1,6 @@
-require "mjai/pai"
-require "mjai/mentsu"
+$LOAD_PATH.unshift(__dir__) unless $LOAD_PATH.include?(__dir__)
+require "pai"
+require "mentsu"
 
 
 module Mjai

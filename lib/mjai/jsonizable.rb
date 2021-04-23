@@ -1,7 +1,8 @@
+$LOAD_PATH.unshift(__dir__) unless $LOAD_PATH.include?(__dir__)
 require "rubygems"
 require "json"
 
-require "mjai/pai"
+require "pai"
 
 
 module Mjai

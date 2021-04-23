@@ -3,8 +3,8 @@ require "thread"
 
 require "rubygems"
 require "json"
-
-require "mjai/tcp_player"
+$LOAD_PATH.unshift(__dir__) unless $LOAD_PATH.include?(__dir__)
+require "tcp_player"
 
 
 module Mjai

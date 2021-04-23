@@ -1,5 +1,6 @@
-require "mjai/shanten_analysis"
-require "mjai/pai"
+$LOAD_PATH.unshift(__dir__) unless $LOAD_PATH.include?(__dir__)
+require "shanten_analysis"
+require "pai"
 
 
 module Mjai

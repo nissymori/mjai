@@ -1,9 +1,9 @@
 require "set"
 require "forwardable"
-
-require "mjai/shanten_analysis"
-require "mjai/pai"
-require "mjai/with_fields"
+$LOAD_PATH.unshift(__dir__) unless $LOAD_PATH.include?(__dir__)
+require "shanten_analysis"
+require "pai"
+require "with_fields"
 
 
 module Mjai

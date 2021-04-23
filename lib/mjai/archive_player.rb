@@ -1,5 +1,6 @@
-require "mjai/player"
-require "mjai/archive"
+$LOAD_PATH.unshift(__dir__) unless $LOAD_PATH.include?(__dir__)
+require "player"
+require "archive"
 
 
 module Mjai

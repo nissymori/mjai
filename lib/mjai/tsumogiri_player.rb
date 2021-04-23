@@ -1,4 +1,4 @@
-require "mjai/player"
+require "player"
 
 
 module Mjai

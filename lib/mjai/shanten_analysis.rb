@@ -1,6 +1,7 @@
+$LOAD_PATH.unshift(__dir__) unless $LOAD_PATH.include?(__dir__)
 require "set"
-require "mjai/pai"
-require "mjai/mentsu"
+require "pai"
+require "mentsu"
 
 
 module Mjai

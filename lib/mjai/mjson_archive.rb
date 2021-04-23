@@ -1,6 +1,7 @@
-require "mjai/archive"
-require "mjai/puppet_player"
-require "mjai/action"
+$LOAD_PATH.unshift(__dir__) unless $LOAD_PATH.include?(__dir__)
+require "archive"
+require "puppet_player"
+require "action"
 
 
 module Mjai

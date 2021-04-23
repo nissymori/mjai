@@ -1,7 +1,8 @@
+$LOAD_PATH.unshift(__dir__) unless $LOAD_PATH.include?(__dir__)
 require "erb"
 require "fileutils"
 
-require "mjai/archive"
+require "archive"
 
 
 module Mjai

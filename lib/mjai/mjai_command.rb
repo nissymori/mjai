@@ -1,11 +1,11 @@
 require "optparse"
-
-require "mjai/tcp_active_game_server"
-require "mjai/tcp_client_game"
-require "mjai/tsumogiri_player"
-require "mjai/shanten_player"
-require "mjai/file_converter"
-require "mjai/game_stats"
+$LOAD_PATH.unshift(__dir__) unless $LOAD_PATH.include?(__dir__)
+require "tcp_active_game_server"
+require "tcp_client_game"
+require "tsumogiri_player"
+require "shanten_player"
+require "file_converter"
+require "game_stats"
 
 
 def server_url(params)  # 新たに実装
